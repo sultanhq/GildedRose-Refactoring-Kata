@@ -13,7 +13,7 @@ class GildedRose
           change_quality(item)
         end
       else
-            change_quality(item)
+        change_quality(item)
       end
       if item.name != "Sulfuras, Hand of Ragnaros"
         decrease_sell_in(item)
@@ -27,6 +27,7 @@ class GildedRose
           change_quality(item)
         end
       end
+
     end
   end
 end
