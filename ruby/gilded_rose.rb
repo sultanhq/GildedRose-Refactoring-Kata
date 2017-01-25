@@ -1,5 +1,6 @@
 class GildedRose
 
+
   def initialize(items)
     @items = items
   end
@@ -10,24 +11,24 @@ class GildedRose
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros"
             if item.name != "Conjured"
-              decrease_quality(item,1)
+              change_quality(item)
             else
-              decrease_quality(item,2)
+              change_quality(item)
             end
           end
         end
       else
         if item.quality < 50
-          increase_quality(item,1)
+          increase_quality(item, 1)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
               if item.quality < 50
-                increase_quality(item,1)
+                increase_quality(item, 1)
               end
             end
             if item.sell_in < 6
               if item.quality < 50
-                increase_quality(item,1)
+                increase_quality(item, 1)
               end
             end
           end
@@ -41,7 +42,7 @@ class GildedRose
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > 0
               if item.name != "Sulfuras, Hand of Ragnaros"
-                decrease_quality(item,1)
+                decrease_quality(item, 1)
               end
             end
           else
@@ -49,7 +50,7 @@ class GildedRose
           end
         else
           if item.quality < 50
-            increase_quality(item,1)
+            change_quality(item)
           end
         end
       end
@@ -67,6 +68,15 @@ end
 
 def decrease_sell_in(item)
   item.sell_in = item.sell_in - 1
+end
+
+def change_quality(item)
+  quality_matrix = {"foo" => -1, "Conjured" => -2, "Aged Brie" => +1, "Sulfuras, Hand of Ragnaros" => 0}
+  if item.name != "Backstage passes to a TAFKAL80ETC concert"
+    item.quality = item.quality + quality_matrix[item.name]
+  else
+    update_pass_quality(item)
+  end
 end
 
 class Item
