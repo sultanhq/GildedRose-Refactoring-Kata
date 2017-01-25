@@ -18,7 +18,7 @@ class GildedRose
   def change_quality(item)
     quality_matrix = { item.name => -1, conjoured_item = item.name.include?('Conjured') ? item.name : nil => -2,
                        'Aged Brie' => +1, 'Sulfuras, Hand of Ragnaros' => 0 }
-    if item.quality < 50
+    if item.quality <= 50
       if item.name != 'Backstage passes to a TAFKAL80ETC concert'
         ammend_quality(item, quality_matrix[item.name])
       else
