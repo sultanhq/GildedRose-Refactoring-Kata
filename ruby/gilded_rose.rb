@@ -7,51 +7,30 @@ class GildedRose
 
   def update_quality()
     @items.each do |item|
+
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            if item.name != "Conjured"
-              change_quality(item)
-            else
-              change_quality(item)
-            end
-          end
+          change_quality(item)
         end
       else
         if item.quality < 50
           increase_quality(item, 1)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                increase_quality(item, 1)
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                increase_quality(item, 1)
-              end
-            end
+            change_quality(item)
           end
         end
       end
       if item.name != "Sulfuras, Hand of Ragnaros"
         decrease_sell_in(item)
       end
+
       if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                decrease_quality(item, 1)
-              end
-            end
-          else
-            decrease_quality(item,item.quality)
-          end
-        else
-          if item.quality < 50
+        if item.name != "Backstage passes to a TAFKAL80ETC concert"
+          if item.quality > 0
             change_quality(item)
           end
+        else
+          change_quality(item)
         end
       end
     end
@@ -77,6 +56,23 @@ def change_quality(item)
   else
     update_pass_quality(item)
   end
+end
+
+def update_pass_quality(item)
+  if item.sell_in < 11
+    if item.quality < 50
+      increase_quality(item, 1)
+    end
+  end
+  if item.sell_in < 6
+    if item.quality < 50
+      increase_quality(item, 1)
+    end
+  end
+  if item.sell_in < 0
+    item.quality = 0
+  end
+
 end
 
 class Item
