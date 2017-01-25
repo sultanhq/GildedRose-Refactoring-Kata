@@ -10,9 +10,9 @@ class GildedRose
         if item.quality > 0
           if item.name != "Sulfuras, Hand of Ragnaros"
             if item.name != "Conjured"
-              item.quality = item.quality - 1
+              decrease_quality(item,1)
             else
-              item.quality = item.quality - 2
+              decrease_quality(item,2)
             end
           end
         end
@@ -41,11 +41,11 @@ class GildedRose
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > 0
               if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
+                decrease_quality(item,1)
               end
             end
           else
-            item.quality = item.quality - item.quality
+            decrease_quality(item,item.quality)
           end
         else
           if item.quality < 50
@@ -56,6 +56,11 @@ class GildedRose
     end
   end
 end
+
+def decrease_quality(item,reduction)
+  item.quality = item.quality - reduction
+end
+
 
 class Item
   attr_accessor :name, :sell_in, :quality
