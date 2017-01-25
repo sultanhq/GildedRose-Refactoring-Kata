@@ -18,16 +18,16 @@ class GildedRose
         end
       else
         if item.quality < 50
-          item.quality = item.quality + 1
+          increase_quality(item,1)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
               if item.quality < 50
-                item.quality = item.quality + 1
+                increase_quality(item,1)
               end
             end
             if item.sell_in < 6
               if item.quality < 50
-                item.quality = item.quality + 1
+                increase_quality(item,1)
               end
             end
           end
@@ -49,7 +49,7 @@ class GildedRose
           end
         else
           if item.quality < 50
-            item.quality = item.quality + 1
+            increase_quality(item,1)
           end
         end
       end
@@ -61,6 +61,9 @@ def decrease_quality(item,reduction)
   item.quality = item.quality - reduction
 end
 
+def increase_quality(item,increament)
+  item.quality = item.quality + increament
+end
 
 class Item
   attr_accessor :name, :sell_in, :quality
